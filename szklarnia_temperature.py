@@ -1,17 +1,15 @@
-from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
-from bs4 import BeautifulSoup
-import time
+from playwright.sync_api import sync_playwright
 
-options = Options()
-options.headless = True
-driver = webdriver.Firefox(options=options)
-driver.get("https://szklarniapwr.pl/")
+def get_temperature():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        page.goto("https://szklarniapwr.pl/", wait_until="domcontentloaded")
 
-time.sleep(2)  # wait for JS to update temperature
+        page.wait_for_function("document.querySelector('.temp') && document.querySelector('.temp').innerText !== '--'", timeout=5000)
+        
+        temp = page.inner_text(".temp")
+        browser.close()
+        return temp
 
-soup = BeautifulSoup(driver.page_source, "html.parser")
-temp_div = soup.find("div", class_="temp")
-print(temp_div.get_text(strip=True))
-
-driver.quit()
+print(get_temperature())
