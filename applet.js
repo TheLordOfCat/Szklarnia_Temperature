@@ -36,11 +36,20 @@ MyApplet.prototype = {
             this.set_applet_label("Script failed");
         }
 
-        Mainloop.timeout_add_seconds(60, () => {
+        Mainloop.timeout_add_seconds(180, () => {
+            this._updateLoop();
+            return false;
+        });
+    },
+
+    on_applet_clicked: function(event) {
+        this.set_applet_label("Updating...");
+        Mainloop.timeout_add_seconds(2, () => {
             this._updateLoop();
             return false;
         });
     }
+
 };
 
 function main(metadata, orientation, panelHeight, instanceId) {
