@@ -1,15 +1,11 @@
-from playwright.sync_api import sync_playwright
+import requests
 
 def get_temperature():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
-        page.goto("https://szklarniapwr.pl/", wait_until="domcontentloaded")
+    url = "https://szklarniapwr.pl/data.json"
+    response = requests.get(url)
+    response.raise_for_status()  # will raise error if request fails
+    data = response.json()
+    return data["temperature"]
 
-        page.wait_for_function("document.querySelector('.temp') && document.querySelector('.temp').innerText !== '--'", timeout=5000)
-        
-        temp = page.inner_text(".temp")
-        browser.close()
-        return temp
-
-print(get_temperature())
+if __name__ == "__main__":
+    print(get_temperature())

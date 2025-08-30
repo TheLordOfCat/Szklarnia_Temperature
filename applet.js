@@ -27,7 +27,7 @@ MyApplet.prototype = {
 
             if (ok && out) {
                 let result = out.toString().trim();
-                this.set_applet_label(result);
+                this.set_applet_label(result +"°C");
             } else {
                 this.set_applet_label("Error");
             }
