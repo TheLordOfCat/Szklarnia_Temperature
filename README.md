@@ -10,8 +10,11 @@ This project creates a little applet which displays temperature inside the Polit
 5. Then activate the venv, by typing "source venv/bin/activate"
 6. Install library requests, "pip install requests"
 7. Deactivate the venv, "deactivate"
-8. Open apltes, select the applet "Szklarnia PWr Temperature" and press "+"
+8. Open apltes, select the applet "Szklarnia PWr Temperature" and press "+" button at the bottom of the window
 9. Press Alt + F2, then type "r" and hit enter
 
 # Addtional info
 You can change the name of the venv, but remember to update the paths in applet.js. You can also adjust the refresh rate of the temperature, standard is 15 minutes.
+
+# Origins
+The project idea was given to me by my good friend Wfa. Thx!!!
