@@ -36,7 +36,7 @@ MyApplet.prototype = {
             this.set_applet_label("Script failed");
         }
 
-        Mainloop.timeout_add_seconds(180, () => {
+        Mainloop.timeout_add_seconds(900, () => {
             this._updateLoop();
             return false;
         });
